@@ -1,4 +1,4 @@
-# Cancer Whole Genome Research Report Supplementary information
+# UMCCR Cancer Whole Genome Research Report Supplementary information
 
 ## Clinical Significance of Variants Based on AMP / ASCO / CAP Guidelines
 Adapted from [PMID: 27993330](https://pubmed.ncbi.nlm.nih.gov/27993330/)
