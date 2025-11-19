@@ -1,5 +1,5 @@
 
-# UMCCR Somatic Whole Genome Sequencing Report Supplementary information
+# CCGCM Somatic Whole Genome Sequencing Report Supplementary information
 
 ## Clinical Significance of Variants Based on AMP / ASCO / CAP Guidelines
 Adapted from [PMID: 27993330](https://pubmed.ncbi.nlm.nih.gov/27993330/)
@@ -104,4 +104,4 @@ Whole transcriptome sequencing was performed on RNA extracted from the same fres
 ## Disclaimers
 **The analysis assumes sample identification, family relationships, and clinical diagnoses are as provided. The evidence compiled in the report is derived from third-party data sources and should be interpreted in the context of all other information for this patient. While every effort is made to ensure accuracy, statements regarding clinical trials and therapeutic recommendations made on this report should not be considered exhaustive, or applicable in all clinical situation. For further information, please contact the laboratory.**
 
-Please contact the laboratory on UMCCR-Genomics@unimelb.edu.au if you wish to discuss this report further.
+Please contact the laboratory on CCGCM-Genomics@unimelb.edu.au if you wish to discuss this report further.
