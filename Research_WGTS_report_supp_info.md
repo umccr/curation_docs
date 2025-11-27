@@ -1,5 +1,5 @@
 
-# CCGCM Somatic Whole Genome Sequencing Report Supplementary information
+# CCGCM Somatic Whole Genome Sequencing Research Report Supplementary information
 
 ## Clinical Significance of Variants Based on AMP / ASCO / CAP Guidelines
 Adapted from [PMID: 27993330](https://pubmed.ncbi.nlm.nih.gov/27993330/)
