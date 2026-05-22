@@ -98,6 +98,53 @@ Homologous recombination deficiency (HRD) was detected by DRAGEN HRD, HRDetect (
 ### Whole transcriptome sequencing (WTS)
 Whole transcriptome sequencing was performed on RNA extracted from the same fresh or FFPE tissue used for WGS (dual DNA/RNA extraction). Approximately 100 million reads were generated per RNA sequencing library. WTS data was aligned and quantified using the Illumina [DRAGEN RNA pipeline (v4.4)](https://help.dragen.illumina.com/). Fusions were confirmed in RNA-seq data using [Arriba v2.5](https://github.com/oicr-gsi/arriba) and the DRAGEN fusion caller. Tertiary analysis of WTS data was performed using [RNAsum v2](https://github.com/umccr/RNAsum), an R package that can post-process, summarize and visualize WTS data outputs. 
 
+### Tissue of Origin classification
+Tissue of origin classification is performed using Hartwig Medical Foundation hmftools [CUPPA v2.3.2](https://github.com/hartwigmedical/hmftools/tree/cuppa-v2.3.2/cuppa). CUPPA is a tissue of origin classifier that uses features derived from WGS and WTS data. Both WGS and WTS features are reported, using the DNA&RNA combined classification. CUPPA provides a tissue of origin classification by comparison to a reference set of tumour histological types and subtypes. It is intended to provide molecular tumour type prediction to verify histopathological classification, support for specific tumour type classification in case of inconclusive histopathological outcome, or prediction of primary tumour location for Cancer of Unknown Primary (CUP). CUPPA DNA&RNA combined classification is composed of three independent DNA sub-classifiers, and two independent RNA sub-classifiers, which assign a likelihood to each of the available cancer classes. DNA&RNA combined classification is reported when tumour purity is ≥30%. Only high-likelihood classifications (score: 0.8-1.0) are reported. Low likelihood classifications can occur in case of tumour histological types or subtypes that are not represented in the CUPPA training set For a list of tumour histological types and subtypes in the [CUPPA training set](https://github.com/hartwigmedical/hmftools/tree/cuppa-v2.3.2/cuppa#training-set). 
+
+**CUPPA training set table:**
+| Cancer   subtype                           | Rules                                                                                             | Samples | Samples w/ RNA |
+|--------------------------------------------|---------------------------------------------------------------------------------------------------|---------|----------------|
+| Anogenital                                 | Anus, Penis, Vulva, Vagina, Uterus: Cervix, Cervix-AdenoCA,   Cervix-SCC                          | 128     | 46             |
+| Bone/Soft tissue:   Cartilaginous neoplasm | Bone-Cart                                                                                         | 9       | 0              |
+| Bone/Soft tissue: GIST                     | Bone/Soft tissue (Gastrointestinal stromal tumor)                                                 | 66      | 27             |
+| Bone/Soft tissue:   Leiomyosarcoma         | Bone/Soft tissue (Leiomyosarcoma), SoftTissue-Leiomyo                                             | 80      | 19             |
+| Bone/Soft tissue: Liposarcoma              | Bone/Soft tissue (Liposarcoma), SoftTissue-Liposarc                                               | 59      | 5              |
+| Bone/Soft tissue: Osteosarcoma             | Bone/Soft tissue (Osteosarcoma), Bone-Osteosarc                                                   | 47      | 0              |
+| Bone/Soft tissue: Undiff.   sarcoma        | Bone/Soft tissue (Undifferentiated sarcoma), Bone/Soft tissue   (Fibrous histiocytoma)            | 37      | 6              |
+| Bone/Soft tissue: Other                    | Bone/Soft tissue ([not Skin, unspecified]), Bone-Epith,   Bone-Osteoblast                         | 157     | 49             |
+| Breast: Other                              | Breast (unspecified: not Triple negative), [Breast-AdenoCA,   Breast-DCIS, Breast-LobularCA]      | 908     | 412            |
+| Breast: Triple negative                    | Breast (unspecified: Triple negative), [Breast-AdenoCA,   Breast-DCIS, Breast-LobularCA]          | 183     | 59             |
+| CNS: Glioma                                | Nervous system (Glioma), CNS-GBM, CNS-Oligo                                                       | 159     | 63             |
+| CNS: Medulloblastoma                       | Nervous system (unspecified: Medulloblastoma), CNS-Medullo                                        | 138     | 0              |
+| CNS: Pilocytic astrocytoma                 | CNS-PiloAstro                                                                                     | 58      | 0              |
+| Colorectum/Small   intestine/Appendix      | [Colorectum, Appendix, Small intestine] (not Neuroendocrine   tumor), ColoRect-AdenoCA            | 837     | 336            |
+| Esophagus/Stomach                          | [Esophagus, Stomach, Gastroesophageal] (not Neuroendocrine   tumor), Stomach-AdenoCA, Eso-AdenoCA | 349     | 130            |
+| Gynecologic: Endometrium                   | Uterus: Endometrium (not Neuroendocrine tumor)                                                    | 85      | 24             |
+| Gynecologic: Ovary/Fallopian   tube        | [Ovary, Fallopian tube, Ovary-AdenoCA] (not Neuroendocrine   tumor)                               | 320     | 112            |
+| Head and neck: Adenoid cystic              | (Carcinoma: Adenoid cystic carcinoma)                                                             | 10      | 5              |
+| Head and neck: Salivary gland              | Salivary gland, Trachea, Head and neck: [Salivary gland,   Parotid gland, Sublingual gland]       | 26      | 15             |
+| Head and neck: Other                       | Head and neck: unspecified                                                                        | 101     | 28             |
+| HPB: Bile duct/Gallbladder                 | Bile duct, Hepatobiliary system, Gallbladder, Biliary-AdenoCA                                     | 131     | 78             |
+| HPB: Liver                                 | Liver, Liver-HCC                                                                                  | 341     | 35             |
+| HPB: Pancreas                              | Pancreas (not Neuroendocrine tumor), Panc-AdenoCA                                                 | 372     | 65             |
+| Kidney: Chromophobe                        | Kidney (unspecified: Chromophobe renal cell carcinoma),   Kidney-ChRCC                            | 44      | 0              |
+| Kidney: Other                              | Kidney (unspecified), Kidney-RCC                                                                  | 277     | 76             |
+| Lung: Non-small cell: LUAD                 | Lung [(Carcinoma: Adenocarcinoma), ], Lung-AdenoCA                                                | 254     | 107            |
+| Lung: Non-small cell: LUSC                 | Lung [(Carcinoma: Squamous cell carcinoma), ], Lung-SCC                                           | 78      | 12             |
+| Lung: Small cell                           | Lung (Carcinoma: [Small cell carcinoma, Small cell carcinoma   combined type])                    | 56      | 35             |
+| Lymphoid tissue                            | Lymphoid tissue, Lymph-BNHL, Lymph-CLL                                                            | 216     | 20             |
+| Mesothelium                                | Mesothelium                                                                                       | 77      | 23             |
+| Myeloid: Acute myeloid   leukemia          | Myeloid-AML                                                                                       | 12      | 0              |
+| Myeloid: Myeloproliferative   neoplasm     | Myeloid-MPN                                                                                       | 18      | 0              |
+| NET: Colorectum/Small   intestine          | [Colorectum, Small intestine] (Neuroendocrine tumor)                                              | 56      | 34             |
+| NET: Lung                                  | Lung (Neuroendocrine tumor)                                                                       | 46      | 5              |
+| NET: Pancreas                              | Pancreas (Neuroendocrine tumor), Panc-Endocrine                                                   | 118     | 21             |
+| Prostate                                   | Prostate (not Neuroendocrine tumor), Prost-AdenoCA                                                | 607     | 161            |
+| Skin: Melanoma                             | Skin (Melanoma), Skin-Melanoma                                                                    | 408     | 133            |
+| Skin: Other                                | Skin (unspecified), Bone/Soft tissue: Skin                                                        | 49      | 19             |
+| Thyroid gland                              | Thyroid gland, Thy-AdenoCA                                                                        | 71      | 16             |
+| Urothelial tract                           | Urothelial tract, Bladder-TCC                                                                     | 241     | 45             |
+
 ## Disclaimers
 **The analysis assumes sample identification, family relationships, and clinical diagnoses are as provided. The evidence compiled in the report is derived from third-party data sources and should be interpreted in the context of all other information for this patient. While every effort is made to ensure accuracy, statements regarding clinical trials and therapeutic recommendations made on this report should not be considered exhaustive, or applicable in all clinical situation. For further information, please contact the laboratory.**
 
